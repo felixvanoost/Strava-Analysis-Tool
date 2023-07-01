@@ -106,12 +106,11 @@ def _generate_activity_count_plot(activity_data: pd.DataFrame, ax: mpl.axes.Axes
             .size().to_frame('count').reset_index())
 
     # Generate and format the bar plot
-    sns.barplot(x='start_date_local',
-                y='count',
-                hue='type',
-                data=data,
-                palette=colour_palette,
-                ax=ax)
+    sns.lineplot(x=data['start_date_local'].astype(str),
+                 y=data['count'],
+                 hue=data['type'],
+                 palette=colour_palette,
+                 ax=ax)
     ax.set(title='Activities over time', ylabel='Number of activities', xlabel='Month')
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
     ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
