@@ -126,6 +126,7 @@ def export_geo_data_file(file_path: str, activity_dataframe: pandas.DataFrame):
                                                      'id',
                                                      'type',
                                                      'start_date_local',
+                                                     'description',
                                                      'distance',
                                                      'moving_time_formatted',
                                                      'total_elevation_gain',
