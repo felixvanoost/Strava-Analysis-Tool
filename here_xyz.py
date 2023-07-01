@@ -104,11 +104,12 @@ def upload_geo_data(geo_data_file_path: pathlib.Path, here_creds_file_path: path
 
     if refresh:
         # Get a list of all uploaded activities (features) in the IML
-        feature_collection = iml.layer.search_features(params={"id=gte": "0"}).to_geojson()
+        feature_collection = iml.layer.iter_features(chunk_size=100,
+                                                     selection=['id'])
 
         # Create a list of feature IDs and split it into chunks
         feature_ids = []
-        for feature in feature_collection['features']:
+        for feature in feature_collection:
             feature_ids.append(feature['id'])
 
         feature_ids_chunks = ([feature_ids[i:i + HERE_FEATURE_IDS_CHUNK_SIZE] for i in
